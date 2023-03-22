@@ -13,9 +13,9 @@ pipeline {
       parallel {
         stage('test intÃ©gration') {
           steps {
-            echo 'test d\'intÃ©gration'
+            echo 'test d\'integration'
             bat './mvnw -Dtest=com.example.testingweb.integration.** test'
-            echo 'fin intégration'
+            echo 'fin integration'
           }
         }
 

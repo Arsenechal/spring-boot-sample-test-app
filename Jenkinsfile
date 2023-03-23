@@ -7,6 +7,7 @@ pipeline {
         bat './mvnw -DskipTests clean install'
         echo 'fin du build'
         archiveArtifacts '**/target/*.jar'
+        bat 'docker build -t testapp:latest .'
       }
     }
 
@@ -44,7 +45,7 @@ pipeline {
       steps {
         input(message: 'Voulez-vous continuez ?', ok: 'Allons-y')
         echo 'stage deploy'
-        bat 'javaw -jar target/testing-web-complete.jar'
+        bat 'docker run -d -p 3030:9090 testapp:latest .'
         echo 'fin de deploimenet'
       }
     }

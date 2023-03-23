@@ -6,6 +6,7 @@ pipeline {
         echo 'build stage'
         bat './mvnw -DskipTests clean install'
         echo 'fin du build'
+        archiveArtifacts '**/target/*.jar'
       }
     }
 
@@ -32,6 +33,7 @@ pipeline {
             echo 'smoke test'
             bat './mvnw -Dtest=com.example.testingweb.smoke.** test'
             echo 'fin smoke'
+            junit '**/target/surefire-reports/TEST-*.xml'
           }
         }
 
@@ -43,6 +45,7 @@ pipeline {
         echo 'stage deploy'
         bat 'java -jar target/testing-web-complete.jar'
         echo 'fin de deploimenet'
+        input(message: 'Voulez-vous continuez ?', ok: 'Allons-y')
       }
     }
 

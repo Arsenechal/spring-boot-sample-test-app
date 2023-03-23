@@ -42,10 +42,10 @@ pipeline {
 
     stage('deploy') {
       steps {
-        echo 'stage deploy'
-        bat 'javaw -jar target/testing-web-complete.jar'
-        echo 'fin de deploimenet'
         input(message: 'Voulez-vous continuez ?', ok: 'Allons-y')
+        echo 'stage deploy'
+        bat 'java -jar target/testing-web-complete.jar'
+        echo 'fin de deploimenet'
       }
     }
 

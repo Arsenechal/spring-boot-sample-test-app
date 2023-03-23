@@ -54,4 +54,10 @@ pipeline {
     maven 'maven 3.9'
     jdk 'java 11'
   }
+  post {
+    success {
+      emailext(to: 'arnaudsenechaldu91@gmail.com', subject: "${env.BUILD_ID} - ${currentBuild.result}", body: "${env.BUILD_ID} - ${env.JENKINS_URL}")
+    }
+
+  }
 }
